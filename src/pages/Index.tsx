@@ -70,10 +70,10 @@ const donateItems: DonateItem[] = [
   },
 ];
 
-const promoCodes: { [key: string]: number } = {
-  'GAME2025': 15,
-  'NEWPLAYER': 10,
-  'PROMO50': 50,
+const promoCodes: { [key: string]: { discount: number; maxActivations: number } } = {
+  'PROMOMILLION': { discount: 50, maxActivations: 10 },
+  'FRIDAY': { discount: 10, maxActivations: 100 },
+  'PODAROK': { discount: 30, maxActivations: 50 },
 };
 
 const faqItems = [
@@ -99,6 +99,11 @@ const Index = () => {
   const [cart, setCart] = useState<DonateItem[]>([]);
   const [promoCode, setPromoCode] = useState('');
   const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
+  const [promoActivations, setPromoActivations] = useState<{ [key: string]: number }>({
+    'PROMOMILLION': 0,
+    'FRIDAY': 0,
+    'PODAROK': 0,
+  });
 
   const addToCart = (item: DonateItem) => {
     setCart([...cart, item]);
@@ -117,8 +122,17 @@ const Index = () => {
   const applyPromoCode = () => {
     const upperPromo = promoCode.toUpperCase();
     if (promoCodes[upperPromo]) {
+      const currentActivations = promoActivations[upperPromo] || 0;
+      const maxActivations = promoCodes[upperPromo].maxActivations;
+      
+      if (currentActivations >= maxActivations) {
+        toast.error(`Промокод исчерпан (${maxActivations}/${maxActivations})`);
+        return;
+      }
+      
+      setPromoActivations({ ...promoActivations, [upperPromo]: currentActivations + 1 });
       setAppliedPromo(upperPromo);
-      toast.success(`Промокод применён! Скидка ${promoCodes[upperPromo]}%`);
+      toast.success(`Промокод применён! Скидка ${promoCodes[upperPromo].discount}%`);
     } else {
       toast.error('Неверный промокод');
     }
@@ -126,7 +140,7 @@ const Index = () => {
 
   const calculateTotal = () => {
     const subtotal = cart.reduce((sum, item) => sum + item.price, 0);
-    const discount = appliedPromo ? promoCodes[appliedPromo] : 0;
+    const discount = appliedPromo ? promoCodes[appliedPromo].discount : 0;
     return {
       subtotal,
       discount,
