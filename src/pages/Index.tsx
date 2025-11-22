@@ -21,7 +21,7 @@ type DonateItem = {
 const donateItems: DonateItem[] = [
   {
     id: 1,
-    title: 'Стартовый пакет',
+    title: 'Legend Bronze',
     description: 'Базовые ресурсы для начала игры',
     price: 299,
     icon: 'Rocket',
