@@ -173,7 +173,7 @@ const Index = () => {
       <section className="container mx-auto px-4 py-20 text-center">
         <div className="animate-float">
           <h2 className="text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-            Прокачай свою игру
+            Windows.Vista
           </h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             Эксклюзивные предметы, уникальные скины и VIP-привилегии. Стань легендой!
