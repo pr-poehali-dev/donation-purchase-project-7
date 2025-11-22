@@ -41,7 +41,6 @@ const donateItems: DonateItem[] = [
     title: 'Премиум набор',
     description: 'Уникальные скины и предметы',
     price: 1499,
-    discount: 20,
     icon: 'Sparkles',
     image: 'https://cdn.poehali.dev/projects/f950de63-ca9e-4820-8fbb-e922deb001c1/files/ec7a31e4-8d07-46ee-a439-5892f36e710f.jpg',
   },
@@ -192,7 +191,6 @@ const Index = () => {
         <h3 className="text-4xl font-bold mb-8 text-center">Популярные донаты</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {donateItems.map((item, index) => {
-            const finalPrice = item.discount ? item.price - (item.price * item.discount) / 100 : item.price;
             return (
               <Card
                 key={item.id}
@@ -220,16 +218,8 @@ const Index = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-baseline gap-2">
-                    {item.discount && (
-                      <span className="text-2xl line-through text-muted-foreground">{item.price}₽</span>
-                    )}
-                    <span className="text-4xl font-bold text-primary">{finalPrice}₽</span>
+                    <span className="text-4xl font-bold text-primary">{item.price}₽</span>
                   </div>
-                  {item.discount && (
-                    <Badge variant="outline" className="mt-2 border-accent text-accent">
-                      Скидка {item.discount}%
-                    </Badge>
-                  )}
                 </CardContent>
                 <CardFooter>
                   <Button
