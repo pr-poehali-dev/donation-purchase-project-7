@@ -15,6 +15,7 @@ type DonateItem = {
   discount?: number;
   popular?: boolean;
   icon: string;
+  image?: string;
 };
 
 const donateItems: DonateItem[] = [
@@ -24,6 +25,7 @@ const donateItems: DonateItem[] = [
     description: 'Базовые ресурсы для начала игры',
     price: 299,
     icon: 'Rocket',
+    image: 'https://cdn.poehali.dev/projects/f950de63-ca9e-4820-8fbb-e922deb001c1/files/099b5b88-1f8b-4697-9bf2-8e9637f7fbc5.jpg',
   },
   {
     id: 2,
@@ -32,6 +34,7 @@ const donateItems: DonateItem[] = [
     price: 999,
     popular: true,
     icon: 'Crown',
+    image: 'https://cdn.poehali.dev/projects/f950de63-ca9e-4820-8fbb-e922deb001c1/files/a391680d-60fa-4599-a984-25ce407f8c78.jpg',
   },
   {
     id: 3,
@@ -40,6 +43,7 @@ const donateItems: DonateItem[] = [
     price: 1499,
     discount: 20,
     icon: 'Sparkles',
+    image: 'https://cdn.poehali.dev/projects/f950de63-ca9e-4820-8fbb-e922deb001c1/files/ec7a31e4-8d07-46ee-a439-5892f36e710f.jpg',
   },
   {
     id: 4,
@@ -47,6 +51,7 @@ const donateItems: DonateItem[] = [
     description: '1000 игровых монет',
     price: 499,
     icon: 'Coins',
+    image: 'https://cdn.poehali.dev/projects/f950de63-ca9e-4820-8fbb-e922deb001c1/files/099b5b88-1f8b-4697-9bf2-8e9637f7fbc5.jpg',
   },
   {
     id: 5,
@@ -54,6 +59,7 @@ const donateItems: DonateItem[] = [
     description: 'Гарантированный легендарный предмет',
     price: 1999,
     icon: 'Package',
+    image: 'https://cdn.poehali.dev/projects/f950de63-ca9e-4820-8fbb-e922deb001c1/files/ec7a31e4-8d07-46ee-a439-5892f36e710f.jpg',
   },
   {
     id: 6,
@@ -61,6 +67,7 @@ const donateItems: DonateItem[] = [
     description: 'Ежедневные бонусы 30 дней',
     price: 599,
     icon: 'Calendar',
+    image: 'https://cdn.poehali.dev/projects/f950de63-ca9e-4820-8fbb-e922deb001c1/files/a391680d-60fa-4599-a984-25ce407f8c78.jpg',
   },
 ];
 
@@ -199,9 +206,15 @@ const Index = () => {
                   </Badge>
                 )}
                 <CardHeader>
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center mb-4">
-                    <Icon name={item.icon as any} size={32} className="text-white" />
-                  </div>
+                  {item.image ? (
+                    <div className="w-full h-48 mb-4 rounded-lg overflow-hidden">
+                      <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                    </div>
+                  ) : (
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center mb-4">
+                      <Icon name={item.icon as any} size={32} className="text-white" />
+                    </div>
+                  )}
                   <CardTitle className="text-2xl">{item.title}</CardTitle>
                   <CardDescription className="text-base">{item.description}</CardDescription>
                 </CardHeader>
